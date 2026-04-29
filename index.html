@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Museum | Philippine Art Exhibit</title>
+    <style>
+        /* CSS: DESIGN & LAYOUT */
+        :root {
+            --museum-gold: #c5a059;
+            --museum-dark: #1a1a1a;
+            --museum-light: #f4f1ea;
+            --text-main: #333;
+        }
+
+        body { 
+            font-family: 'Georgia', serif; 
+            background-color: var(--museum-light); 
+            margin: 0; 
+            color: var(--text-main); 
+            line-height: 1.6;
+        }
+        
+        header { 
+            background: var(--museum-dark); 
+            color: white; 
+            padding: 60px 20px; 
+            text-align: center;
+            border-bottom: 5px solid var(--museum-gold);
+        }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+
+        /* Section 5: Curatorial Concept styling */
+        .statement { 
+            background: white; 
+            padding: 30px; 
+            border-left: 10px solid var(--museum-gold);
+            margin-bottom: 50px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Section 6 & 10: Gallery Layout */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .art-card { 
+            background: white; 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+        }
+
+        .art-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--museum-gold); 
+        }
+
+        .art-card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Section 11: Modal/Lightbox for Interactivity */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white; 
+            margin: 2% auto; 
+            padding: 30px;
+            width: 90%; 
+            max-width: 800px; 
+            border-radius: 8px; 
+            position: relative;
+        }
+
+        .close { 
+            position: absolute; 
+            right: 20px; 
+            top: 10px; 
+            font-size: 35px; 
+            cursor: pointer; 
+            color: #888;
+        }
+
+        /* Universal Image Sizing for Modal */
+        .modal-image {
+            width: 100%;           
+            max-height: 450px;     
+            object-fit: contain;   
+            background: #000;      
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        /* Section 7 & 9: Analysis & Label Styling */
+        .analysis-box { 
+            margin-top: 20px; 
+            border-top: 2px solid var(--museum-light); 
+            padding-top: 20px; 
+        }
+        
+        .label-title { color: var(--museum-gold); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
+
+        footer { 
+            text-align: center; 
+            padding: 40px; 
+            background: var(--museum-dark); 
+            color: white; 
+            margin-top: 50px; 
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Change this to your actual Exhibit Name -->
+    <h1>[VIRTUAL EXHIBIT NAME]</h1>
+    <p>Documenting Philippine Art & Cultural Heritage</p>
+</header>
+
+<div class="container">
+    <!-- Curatorial Statement -->
+    <section class="statement">
+        <h2>Curatorial Statement</h2>
+        <p><strong>Theme:</strong> [Enter Theme Here, e.g., 'Modernity & Tradition']</p>
+        <p>[Write your short curatorial statement here explaining why these pieces were selected and the narrative of your exhibit.]</p>
+    </section>
+
+    <!-- Art Gallery Grid -->
+    <div class="gallery-grid">
+        <!-- Artwork 1 -->
+        <div class="art-card" onclick="openModal('art1')">
+            <img src="spoliarium.jpg" alt="Artwork 1">
+            <h3>[spoliarium]</h3>
+            <p><em>Juan Luna</em></p>
+            <p style="color: var(--museum-gold); font-size: 0.8rem;">Click to View Analysis</p>
+        </div>
+
+        <!-- Artwork 2 -->
+        <div class="art-card" onclick="openModal('art2')">
+            <img src="art2.jpg" alt="Artwork 2">
+            <h3>[Artwork Title 2]</h3>
+            <p><em>Artist Name</em></p>
+            <p style="color: var(--museum-gold); font-size: 0.8rem;">Click to View Analysis</p>
+        </div>
+
+        <!-- Artwork 3 -->
+        <div class="art-card" onclick="openModal('art3')">
+            <img src="art3.jpg" alt="Artwork 3">
+            <h3>[Artwork Title 3]</h3>
+            <p><em>Artist Name</em></p>
+            <p style="color: var(--museum-gold); font-size: 0.8rem;">Click to View Analysis</p>
+        </div>
+
+        <!-- Artwork 4 -->
+        <div class="art-card" onclick="openModal('art4')">
+            <img src="art4.jpg" alt="Artwork 4">
+            <h3>[Artwork Title 4]</h3>
+            <p><em>Artist Name</em></p>
+            <p style="color: var(--museum-gold); font-size: 0.8rem;">Click to View Analysis</p>
+        </div>
+
+        <!-- Artwork 5 -->
+        <div class="art-card" onclick="openModal('art5')">
+            <img src="art5.jpg" alt="Artwork 5">
+            <h3>[Artwork Title 5]</h3>
+            <p><em>Artist Name</em></p>
+            <p style="color: var(--museum-gold); font-size: 0.8rem;">Click to View Analysis</p>
+        </div>
+    </div>
+</div>
+
+<!-- Interactive Modal Window -->
+<div id="artModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            <!-- JavaScript will inject content here -->
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>ART 002 | P3 Performance Task Exam</p>
+    <p>Prepared by: [Your Group Members' Names]</p>
+</footer>
+
+<script>
+    /* JAVASCRIPT: CORE OBJECTS & INTERACTIVITY */
+
+    // INPUT YOUR DATA HERE
+    const artworkData = {
+        art1: {
+            title: "Spoliarium",
+            artist: "Juan Luna, 1884",
+            image: "spoliarium.jpg", 
+            subject: "Bloody gladiators being dragged in a basement.",
+            content: "An allegory for the suffering of Filipinos under Spanish rule.",
+            context: "National Museum of Fine Arts, Philippines. Historical colonial era."
+        },
+        art2: {
+            title: "Title of Artwork 2",
+            artist: "Artist Name, Year",
+            image: "art2.jpg",
+            subject: "Describe what is depicted...",
+            content: "Explain the message or emotion...",
+            context: "Historical or cultural background..."
+        },
+        art3: {
+            title: "Title of Artwork 3",
+            artist: "Artist Name, Year",
+            image: "art3.jpg",
+            subject: "...",
+            content: "...",
+            context: "..."
+        },
+        art4: {
+            title: "Title of Artwork 4",
+            artist: "Artist Name, Year",
+            image: "art4.jpg",
+            subject: "...",
+            content: "...",
+            context: "..."
+        },
+        art5: {
+            title: "Title of Artwork 5",
+            artist: "Artist Name, Year",
+            image: "art5.jpg",
+            subject: "...",
+            content: "...",
+            context: "..."
+        }
+    };
+
+    function openModal(id) {
+        const data = artworkData[id];
+        const modal = document.getElementById("artModal");
+        const body = document.getElementById("modal-body");
+
+        body.innerHTML = `
+            <img src="${data.image}" class="modal-image"> 
+            <h2 style="margin-top:0;">${data.title}</h2>
+            <p><em>${data.artist}</em></p>
+            
+            <div class="analysis-box">
+                <span class="label-title">Subject</span>
+                <p>${data.subject}</p>
+                
+                <span class="label-title">Content</span>
+                <p>${data.content}</p>
+                
+                <span class="label-title">Context</span>
+                <p>${data.context}</p>
+            </div>
+        `;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+    }
+
+    function closeModal() {
+        document.getElementById("artModal").style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    // Close if user clicks outside the white box
+    window.onclick = function(event) {
+        let modal = document.getElementById("artModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
